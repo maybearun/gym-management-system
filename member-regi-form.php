@@ -84,6 +84,11 @@
             <Label for="uploadProflie">Upload Profile</Label><br>
             <input type="file" class="form-control-file" id="uploadProfile">
           </div><br>
+          <!-- date of birth -->
+          <div class="form-group">
+          <label for="inputDob">Date of birth</label>
+          <input type="date" class="form-control" id="inputDob">
+        </div><br>
         <!-- address -->
         <div class="form-group">
           <label for="inputAddress">Adress line 1</label>
