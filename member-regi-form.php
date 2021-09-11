@@ -3,7 +3,7 @@ require "includes/functions.php";
 
 $showError = false;
 $showAlert = false;
-
+$errors=[];
 if (isset($_POST['submit'])) {
 
   $loctionDir = "/code/upload/members/";
@@ -58,10 +58,10 @@ if (isset($_POST['submit'])) {
   $zip = $_POST['zip'],
   );
     
-  echo (insertData($columns, $table, $values));
+  insertData($columns, $table, $values);
   
   if(isset($_SESSION['errors'])){
-    print_r($_SESSION['errors']);
+    $errors= $_SESSION['errors'];
     unset($_SESSION['errors']);
   }
 }
@@ -89,6 +89,20 @@ if (isset($_POST['submit'])) {
   <center>
     <h2>Member Registration</h2>
   </center><br>
+  <?php
+  if (!empty($errors)){
+    echo '<div class="alert alert-danger" role="alert">'.
+          print_r($errors).
+          '</div>';
+  }
+  else{
+    echo '<div class="alert alert-success" role="alert">
+          Registration successfull!
+          </div>';
+  }
+  
+
+?>
   <form method="POST" action="#" enctype="multipart/form-data">
 
     <div class="row">
