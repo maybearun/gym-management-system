@@ -13,8 +13,25 @@ if (isset($_POST['submit'])) {
   $password = $_POST['password'];
   $rePassword = $_POST['rePassword'];
 
+  $firstName = $_POST['firstName'];
+  $lastName = $_POST['lastName'];
+  $fileDestination;
+  $gender = $_POST['gender'];
+  $dob = $_POST['dob'];
+  $contact = $_POST['contact'];
+  $altContact = $_POST['altContact'];
+  $email = $_POST['email'];
+  $hash;
+  $address1 = $_POST['address1'];
+  $address2 = $_POST['address2'];
+  $city = $_POST['city'];
+  $state = $_POST['state'];
+  $country = $_POST['country'];
+  $zip = $_POST['zip'];
+
   if ($password != $rePassword) {
     $showError = true;
+    // $errors= "passwords do not match!!";
   } else {
     $hash = password_hash($password, PASSWORD_DEFAULT);
   }
@@ -39,31 +56,34 @@ if (isset($_POST['submit'])) {
       pincode
       )';
   $values = array(
-    // collect data from form
-
-    $firstName = $_POST['firstName'],
-  $lastName = $_POST['lastName'],
-  $fileDestination,
-  $gender = $_POST['gender'],
-  $dob = $_POST['dob'],
-  $contact = $_POST['contact'],
-  $altContact = $_POST['altContact'],
-  $email = $_POST['email'],
-  $hash,
-  $address1 = $_POST['address1'],
-  $address2 = $_POST['address2'],
-  $city = $_POST['city'],
-  $state = $_POST['state'],
-  $country = $_POST['country'],
-  $zip = $_POST['zip'],
+    // data collected  from form
+    $firstName,
+    $lastName,
+    $fileDestination,
+    $gender,
+    $dob,
+    $contact,
+    $altContact,
+    $email,
+    $hash,
+    $address1,
+    $address2,
+    $city ,
+    $state,
+    $country,
+    $zip
   );
-    
+    // print_r($values);
   insertData($columns, $table, $values);
   
   if(isset($_SESSION['errors'])){
-    $errors= $_SESSION['errors'];
+    print_r($_SESSION['errors']); 
     unset($_SESSION['errors']);
   }
+  // if(isset($_POST['zip'])){
+  //   die('registered');
+  // }
+ 
 }
 ?>
 
@@ -76,6 +96,12 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- jquery-validate -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
   <title>Member Registration</title>
 </head>
@@ -89,21 +115,24 @@ if (isset($_POST['submit'])) {
   <center>
     <h2>Member Registration</h2>
   </center><br>
-  <?php
-  if (!empty($errors)){
-    echo '<div class="alert alert-danger" role="alert">'.
-          print_r($errors).
-          '</div>';
+  <!-- <?php
+  if(isset($_POST['submit'])){
+    if (!empty($errors)){
+      echo '<div class="alert alert-danger" role="alert">'.
+            print_r($errors).
+            '</div>';
+    }
+    else{
+      echo '<div class="alert alert-success" role="alert">
+            Registration successfull!
+            </div>';
+    }
   }
-  else{
-    echo '<div class="alert alert-success" role="alert">
-          Registration successfull!
-          </div>';
-  }
-  
+ 
+   -->
 
 ?>
-  <form method="POST" action="#" enctype="multipart/form-data">
+  <form id="memberRegistration" method="POST" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
 
     <div class="row">
       <!-- first name and last name -->
@@ -210,6 +239,86 @@ if (isset($_POST['submit'])) {
       <button type="submit" class="btn btn-primary" name="submit" id="submit">Register</button>
     </div>
   </form>
+
+  <script>
+    $(document).ready(function(){
+      $('#memberRegistration').submit(function(e){
+       
+       $('#memberRegistration').validate({
+        rules:{
+          firstName: 'required',
+          lastName: 'required',
+          contact: {required: true, minlength:10, maxlength:10},
+          altContact: {required: true, minlength:10, maxlength:10},
+          email: 'required',
+          password: {required: true, minlength:8},
+          rePassword: {required: true, minlength:8, equalTo: '#password'},
+          gender:'required',
+          uploadProflie: 'required',
+          dob: 'required',
+          address1: 'required',
+          address2: 'required',
+          city: 'required',
+          state: 'required',
+          country: 'required',
+          zip: 'required'
+        },
+        messages:{
+          firstName: 'This field is required',
+          lastName: 'This field is required',
+          contact: {
+            required: 'This field is required', 
+            minlength:'Contact no. should be 10 digits', 
+            maxlength:'Contact no. should be 10 digits'
+          },
+          altContact: {
+            required: 'This field is required', 
+            minlength:'Contact no. should be 10 digits', 
+            maxlength:'Contact no. should be 10 digits'
+          },
+          email: 'This field is required',
+          password: {
+            required: 'This field is required', 
+            minlength:'password should be atleast 8 characters'
+          },
+          rePassword: {
+            required: 'This field is required', 
+            minlength:'password should be atleast 8 characters', 
+            equalTo: 'Passwords do not match'
+          },
+          gender:'This field is required',
+          uploadProflie: 'This field is required',
+          dob: 'This field is required',
+          address1: 'This field is required',
+          address2: 'This field is required',
+          city: 'This field is required',
+          state: 'This field is required',
+          country: 'This field is required',
+          zip: 'This field is required'
+        }
+       });
+       var formData=$("#memberRegistration").serialize();
+       console.log(formData);
+      //  $.ajax({
+        //  url:'',
+      //    type:'POST',
+      //    data: formData,
+      //   //  dataType: 'json',
+      //   //  encode: true,
+      //  }).done(function(data){
+       
+      //  })
+      $.post('<?php echo $_SERVER['PHP_SELF']?>',function (formData)).fail(function (formData) {
+        $("#memberRegistration").html(
+          '<div class="alert alert-danger">Could not reach server, please try again later.</div>'
+        );
+      });
+       e.preventDefault();
+      });
+    });
+      
+   
+  </script>
 </body>
 
 </html>
