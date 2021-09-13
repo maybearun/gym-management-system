@@ -115,21 +115,21 @@ if (isset($_POST['submit'])) {
   <center>
     <h2>Member Registration</h2>
   </center><br>
-  <!-- <?php
-  if(isset($_POST['submit'])){
-    if (!empty($errors)){
-      echo '<div class="alert alert-danger" role="alert">'.
-            print_r($errors).
-            '</div>';
-    }
-    else{
-      echo '<div class="alert alert-success" role="alert">
-            Registration successfull!
-            </div>';
-    }
-  }
+  <?php
+  // if(isset($_POST['submit'])){
+  //   if (!empty($errors)){
+  //     echo '<div class="alert alert-danger" role="alert">'.
+  //           print_r($errors).
+  //           '</div>';
+  //   }
+  //   else{
+  //     echo '<div class="alert alert-success" role="alert">
+  //           Registration successfull!
+  //           </div>';
+  //   }
+  // }
  
-   -->
+  
 
 ?>
   <form id="memberRegistration" method="POST" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
