@@ -106,19 +106,19 @@ function uploadFile($location, $id)
 					return $fileDestination;
 				}
 				else{
-					return "there was an error";
+					echo "there was an error";
 				}
             }
             else{
-                return "Your file is to big";
+                echo "Your file is to big";
             }
         }
         else{
-            return "There was an error uploading the file. Please Try again";
+            echo "There was an error uploading the file. Please Try again";
         }
     }
     else{
-        return "You are not allowed to upload images of this format.";
+        echo "You are not allowed to upload images of this format.";
     }
     
 // 	$target = $location . time() . basename($id['name']);
@@ -127,5 +127,28 @@ function uploadFile($location, $id)
 // 	} else {
 // 		return null;
 // 	}
+
+function loginMember($email, $password){
+	if (isset($_SESSION['id'])){
+		session_unset();
+	}
+	global $pdo;
+	
+		$stmt = $pdo->prepare("SELECT * FROM members where email_id = ?");
+		$stmt->execute($email);
+		$check= $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if (password_verify($password,$check['password'])){
+			
+			session_start();
+			$_SESSION['id']=$check['id'];
+			echo $_SESSION['id'];
+			return true;
+		}
+		else{
+			return false;
+		}
+	
+	
+}
 }
 
