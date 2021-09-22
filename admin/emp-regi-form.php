@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
-      <form id="employeeRegistration" method="POST" action="#" enctype="multipart/form-data">
+      <form id="employeeRegistration" method="POST"  action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
 
         <div class="row">
           <!-- first name and last name -->

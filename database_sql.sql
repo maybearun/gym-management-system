@@ -138,7 +138,7 @@ ALTER TABLE `Employee attendance` ADD  FOREIGN KEY (`employee_id`) REFERENCES `E
 
 ALTER TABLE `Member subscription` ADD  FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_id`);
 
-ALTER TABLE `Member subscription` ADD  FOREIGN KEY (`plan_id`) REFERENCES `Membership Plans`(`plan_id`);
+ALTER TABLE `Member subscription` ADD  FOREIGN KEY (`plan_id`) REFERENCES `Membership_Plans`(`plan_id`);
 
 
 

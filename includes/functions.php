@@ -20,14 +20,14 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
-function fetchData($columns, $table, $condition = '', $params = [], $mode = 'default')
+function fetchData($columns, $table, $condition = '', $params = []/*, $mode = 'default'*/)
 {
 	global $pdo;
 	try {
 		$stmt = $pdo->prepare("SELECT $columns FROM $table $condition");
 		$stmt->execute($params);
-		if ($mode == "default")
-			return $stmt->fetchAll(PDO::FETCH_NUM);
+		// if ($mode == "default")
+		// 	return $stmt->fetchAll(PDO::FETCH_NUM);
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	} catch (Exception $e) {
 		$_SESSION['errors'][] = "Data cannot be fetched. Error Message:" . $e->getMessage();
@@ -128,6 +128,8 @@ function uploadFile($location, $id)
 // 		return null;
 // 	}
 
+
+}
 function loginMember($email, $password){
 	if (isset($_SESSION['id'])){
 		session_unset();
@@ -135,20 +137,25 @@ function loginMember($email, $password){
 	global $pdo;
 	
 		$stmt = $pdo->prepare("SELECT * FROM members where email_id = ?");
-		$stmt->execute($email);
+		$stmt->execute([$email]);
 		$check= $stmt->fetchAll(PDO::FETCH_ASSOC);
-		if (password_verify($password,$check['password'])){
+		if (password_verify($password,$check[0]['password'])){
 			
 			session_start();
-			$_SESSION['id']=$check['id'];
-			echo $_SESSION['id'];
+			$_SESSION['id']=$check[0]['member_id'];
+			$_SESSION['role']='member';
+			$_SESSION['email']=$check[0]['email_id'];
+			$_SESSION['profile']=$check[0]['profile_picture'];
+			$_SESSION['firstName']=$check[0]['first_name'];
+			$_SESSION['lastName']=$check[0]['last_name'];
+			$_SESSION['contact']=$check[0]['contact_number'];
+			$_SESSION['gender']=$check[0]['gender'];
+			$_SESSION['dob']=$check[0]['date_of_birth'];
 			return true;
 		}
 		else{
+			
 			return false;
 		}
-	
-	
-}
 }
 

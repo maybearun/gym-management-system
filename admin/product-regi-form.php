@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
-      <form method="POST" action="#" enctype="multipart/form-data">
+      <form id="productRegistration" method="POST"  action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
 
         <!-- product name and description -->
         <div class="form-group col-md-6">
@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
 <!-- /.content-wrapper -->
 <script>
 $(document).ready(function() {
-    $('#employeeRegistration').validate({
+    $('#productRegistration').validate({
       rules: {
         productName: 'required',
         productType: 'required',

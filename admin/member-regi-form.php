@@ -1,4 +1,8 @@
-<?php
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <?php
 require "../includes/functions.php";
 include "includes/header.php";
 include "includes/navbar.php";
@@ -87,9 +91,6 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
