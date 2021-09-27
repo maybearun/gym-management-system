@@ -1,8 +1,4 @@
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <?php
+<?php
 require "../includes/functions.php";
 include "includes/header.php";
 include "includes/navbar.php";
@@ -73,6 +69,7 @@ if (isset($_POST['submit'])) {
   );
   // print_r($values);
   $check=insertData($columns, $table, $values);
+  
   if (isset($check)){
     echo "<div class='alert alert-success' role='alert'>
     data $check inserted successfully  </div>";
@@ -91,11 +88,16 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+ 
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Member Registration</h1>
+
         </div>
       </div>
     </div><!-- /.container-fluid -->

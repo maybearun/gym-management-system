@@ -29,8 +29,8 @@ include'../includes/functions.php';
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="../../code/dist/img/user2-160x160.jpg"
-                       width="128" height="128"
+                       src="<?php echo $_SESSION['profile']?>"
+                     
                        alt="User profile picture">
                 </div>
                 <h3 class="profile-username text-center"><?php echo $_SESSION['firstName']." ".$_SESSION['lastName']?> </h3>

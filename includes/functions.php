@@ -141,8 +141,8 @@ function loginMember($email, $password){
 		$check= $stmt->fetchAll(PDO::FETCH_ASSOC);
 		if (password_verify($password,$check[0]['password'])){
 			
-			session_start();
-			$_SESSION['id']=$check[0]['member_id'];
+			// session_start();
+			$_SESSION['member_id']=$check[0]['member_id'];
 			$_SESSION['role']='member';
 			$_SESSION['email']=$check[0]['email_id'];
 			$_SESSION['profile']=$check[0]['profile_picture'];
@@ -157,5 +157,42 @@ function loginMember($email, $password){
 			
 			return false;
 		}
+}
+
+function loginStaff($email, $password){
+	if (isset($_SESSION['id'])){
+		session_unset();
+	}
+	try{
+		global $pdo;
+	
+		$stmt = $pdo->prepare("SELECT * FROM employees where email_id = ?");
+		$stmt->execute([$email]);
+		$check= $stmt->fetchAll(PDO::FETCH_ASSOC);
+		// echo $check;
+		if (password_verify($password,$check[0]['password'])){
+			
+			// session_start();
+			$_SESSION['id']=$check[0]['employee_id'];
+			$_SESSION['role']=$check[0]['designation'];
+			$_SESSION['email']=$check[0]['email_id'];
+			$_SESSION['profile']=$check[0]['profile_picture'];
+			$_SESSION['firstName']=$check[0]['first_name'];
+			$_SESSION['lastName']=$check[0]['last_name'];
+			$_SESSION['contact']=$check[0]['contact_number'];
+			$_SESSION['gender']=$check[0]['gender'];
+			$_SESSION['dob']=$check[0]['date_of_birth'];
+			return true;
+		}
+		else{
+			// echo "invalid";
+			return false;
+		}
+	}
+	catch (Exception $e){
+		$_SESSION['errors'][] = "cannot login. Error Message:" . $e->getMessage();
+		return false;
+	}
+	
 }
 

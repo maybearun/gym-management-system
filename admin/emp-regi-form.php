@@ -87,16 +87,6 @@ if (isset($_POST['submit'])) {
     $aadhar
   );
   $check = insertData($columns, $table, $values);
-  if (isset($check)) {
-    echo "<div class='alert alert-success' role='alert'>
-    data $check inserted successfully  </div>";
-  } else {
-    if (isset($_SESSION['errors'])) {
-      echo "<div class='alert alert-danger' role='alert'>
-    data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
-      unset($_SESSION['errors']);
-    }
-  }
 }
 
 ?>
@@ -109,13 +99,25 @@ if (isset($_POST['submit'])) {
         <div class="col-sm-6">
           <h1>Employee Registration</h1>
         </div>
+        <?php
+        if (isset($check)) {
+          echo "<div class='alert alert-success' role='alert'>
+    data $check inserted successfully  </div>";
+        } else {
+          if (isset($_SESSION['errors'])) {
+            echo "<div class='alert alert-danger' role='alert'>
+    data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
+            unset($_SESSION['errors']);
+          }
+        }
+        ?>
       </div>
     </div><!-- /.container-fluid -->
   </section>
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
-      <form id="employeeRegistration" method="POST"  action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
+      <form id="employeeRegistration" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
 
         <div class="row">
           <!-- first name and last name -->
@@ -333,16 +335,12 @@ if (isset($_POST['submit'])) {
         aadhar: 'This field is required'
       },
       submitHandler: function(form) {
-        
-          form.submit();
+
+        form.submit();
       }
     });
-   
+
   });
 </script>
 
 <?php include "includes/footer.php" ?>
-
-
-
-

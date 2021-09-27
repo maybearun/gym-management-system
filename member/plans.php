@@ -1,24 +1,20 @@
 <?php
-
-
 require "../includes/functions.php";
 include 'includes/header.php';
 include 'includes/navbar.php';
 $table = 'membership_plans';
 $check = fetchData('*', $table);
-// echo $check;
-// print_r($check);
 
-// if (isset($check)) {
-//     echo "<div class='alert alert-success' role='alert'>
-//     data $check inserted successfully  </div>";
-//   } else {
-//     if (isset($_SESSION['errors'])) {
-//       echo "<div class='alert alert-danger' role='alert'>
-//     data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
-//       unset($_SESSION['errors']);
-//     }
-//   }
+if (isset($_POST['planName'])) {
+    $_SESSION['planId']=$_POST['planId'];
+    $_SESSION['planName'] = $_POST['planName'];
+    $_SESSION['planDescription'] = $_POST['planDescription'];
+    $_SESSION['planPrice'] = $_POST['planPrice'];
+    $_SESSION['planValidity'] = $_POST['planValidity'];
+    echo '<script>window.location="/code/member/checkout.php"</script>';
+
+}
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -39,7 +35,7 @@ $check = fetchData('*', $table);
 
         <!-- Default box -->
         <div class="card">
-                
+
             <div class="card-body p-0">
                 <table id="viewPlans" class="table table-striped projects">
                     <thead>
@@ -52,20 +48,18 @@ $check = fetchData('*', $table);
 
                     </thead>
                     <tbody>
-                        <?php
-
-                        foreach($check as $check){
-                            echo'
+                        <?php foreach ($check as $row) { ?>
+                            <form action="checkout.php">
                                 <tr>
-                                    <td>' . $check['plan_name'] . '</td>
-                                    <td>' . $check['plan_description'] . '</td>
-                                    <td>' . $check['plan_price'] . '</td>
-                                    <td>' . $check['plan_validity'] . ' days</td>
-                                    <td><button id='.$check['plan_id'].' class="btn btn-primary btn-sm">Buy</button></td>
+                                    <td id="planName<?= $row['plan_id'] ?>"><?= $row['plan_name'] ?></td>
+                                    <td id="planDescription<?= $row['plan_id'] ?>"><?= $row['plan_description'] ?></td>
+                                    <td id="planPrice<?= $row['plan_id'] ?>"><?= $row['plan_price'] ?></td>
+                                    <td id="planValidity<?= $row['plan_id'] ?>"><?= $row['plan_validity'] ?> days</td>
+                                    <td><button class="buyBtn btn btn-primary btn-sm" onclick="getData('<?= $row['plan_id'] ?>','<?= $row['plan_name'] ?>','<?= $row['plan_description'] ?>',<?= $row['plan_price'] ?>,<?= $row['plan_validity'] ?>)">Buy</button></td>
                                 </tr>
-                            ';
-                        }
-                        ?>
+                            </form>
+
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -75,12 +69,22 @@ $check = fetchData('*', $table);
 
     </section>
     <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+
 <script>
     $().ready(function() {
         $('#viewPlans').DataTable();
     });
+
+    function getData(planId,planName, planDescription, planPrice, planValidity) {
+        var data = {
+            planId:planId,
+            planName: planName,
+            planDescription: planDescription,
+            planPrice: planPrice,
+            planValidity: planValidity,
+        }
+        $.post("<?= $_SERVER['PHP_SELF']?>",data);
+    }
 </script>
 <?php
 include 'includes/footer.php';

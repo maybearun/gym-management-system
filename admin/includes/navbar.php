@@ -1,3 +1,4 @@
+
  <!-- Navbar -->
  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
    <!-- Left navbar links -->
@@ -144,9 +145,9 @@
            </ul>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link">
+           <a href="../../code/logout.php" name="logout" id="logout" class="nav-link">
              <i class="nav-icon fas fa-edit"></i>
-             <p>
+             <p >
                logout
              </p>
            </a>

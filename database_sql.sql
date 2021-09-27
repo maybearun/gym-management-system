@@ -58,7 +58,7 @@ CREATE TABLE `Products` (
 	PRIMARY KEY (`product_id`)
 );
 
-CREATE TABLE `Member Attendance` (
+CREATE TABLE `Member_Attendance` (
 	`member_id` int NOT NULL,
 	`timestamp` TIMESTAMP NOT NULL
 );
@@ -91,14 +91,14 @@ CREATE TABLE `Order` (
 	PRIMARY KEY (`order_id`)
 );
 
-CREATE TABLE `Employee attendance` (
+CREATE TABLE `Employee_attendance` (
 	`employee_id` int NOT NULL,
 	`timestamp` TIMESTAMP NOT NULL,
 	`check_in` TIMESTAMP NOT NULL,
 	`check_out` TIMESTAMP NOT NULL
 );
 
-CREATE TABLE `Membership Plans` (
+CREATE TABLE `Membership_Plans` (
 	`plan_id` int(11) NOT NULL,
 	`plan_name` varchar(255) NOT NULL,
 	`plan_description` varchar(255) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE `Membership Plans` (
 	PRIMARY KEY (`plan_id`)
 );
 
-CREATE TABLE `Member subscription` (
+CREATE TABLE `Member_subscription` (
 	`member_id` int NOT NULL,
 	`plan_id` int NOT NULL,
 	`plan_name` varchar(255) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE `Member subscription` (
 	`timestamp` TIMESTAMP(6) NOT NULL
 );
 
-ALTER TABLE `Member Attendance` ADD  FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_id`);
+ALTER TABLE `Member_Attendance` ADD  FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_id`);
 
 ALTER TABLE `Cart` ADD FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_id`);
 
@@ -134,11 +134,11 @@ ALTER TABLE `Order` ADD  FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_
 
 ALTER TABLE `Order` ADD  FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`);
 
-ALTER TABLE `Employee attendance` ADD  FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`);
+ALTER TABLE `Employee_attendance` ADD  FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`);
 
-ALTER TABLE `Member subscription` ADD  FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_id`);
+ALTER TABLE `Member_subscription` ADD  FOREIGN KEY (`member_id`) REFERENCES `Members`(`member_id`);
 
-ALTER TABLE `Member subscription` ADD  FOREIGN KEY (`plan_id`) REFERENCES `Membership_Plans`(`plan_id`);
+ALTER TABLE `Member_subscription` ADD  FOREIGN KEY (`plan_id`) REFERENCES `Membership_Plans`(`plan_id`);
 
 
 
