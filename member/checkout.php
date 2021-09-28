@@ -8,68 +8,62 @@ $planName = $_SESSION['planName'];
 $planDescription = $_SESSION['planDescription'];
 $planPrice = (int) $_SESSION['planPrice'];
 $planValidity = (int) $_SESSION['planValidity'];
-// echo $planName;
-// echo $planDescription;
-// echo $planPrice;
-// echo $planValidity;
-// $startDate=date("Y-m-d");
-// echo date('Y-m-d', strtotime($startDate. " + $planValidity days"));
 
 //payment processing 
-if (isset($_POST['paymentId']) && isset($_POST['member_id']) && isset($_POST['amount'])) {
-    $name = $_POST['name'];
-    $id = $_POST['member_id'];
-    $amount = $_POST['amount'];
-    $contact = $_POST['contact'];
-    $email = $_POST['email'];
-    $paymentId = $_POST['paymentId'];
-
+if (isset($_POST['paymentId']) && isset($_POST['id']) && isset($_POST['amount'])) {
    
-    $table = "payments";
-    $columns = '(
-    member_id,
-    name,
-    amount,
-    contact,
-    email_id,
-    payment_id
-    )';
-    $values = array(
-        $id,
+    $memberId=$_POST['id'];
+    $name=$_POST['name'];
+    $amount=$_POST['amount'];
+    $contact=$_POST['contact'];
+    $email=$_POST['email'];
+    $paymentId=$_POST['paymentId'];
+
+    $table="payments";
+    $columns="(
+        member_id,
+        name,
+        amount,
+        contact,
+        email_id,
+        payment_id 
+        )";
+    $values=array(
+        $memberId,
         $name,
         $amount,
         $contact,
         $email,
         $paymentId
     );
-    $checkPayment = insertData($columns, $table, $values);
-    // print_r($_SESSION['errors']);
-    //insert data into member_subscription table
-    // $startDate=date("Y-m-d");
-    // $endDatedate('Y-m-d', strtotime($startDate. " + $planValidity days"));
-    // $tableMs = "member_subscription";
-    // $columnsMS = '(
-    //     member_id,
-    //     plan_id,
-    //     plan_name,
-    //     plan_description,
-    //     plan_start_date,
-    //     plan_end_date
-    // )';
-    // $valuesMS = array(
-    //     $id,
-    //     $planId,
-    //     $planName,
-    //     $planDescription,
-    //     $startDate,
-    //     $endDate,
-    // );
-    // if(isset($checkPayment)){
-    //     $checkSubscription = insertData($columnsMS, $tableMs, $valuesMS);
-    // }
-    
-}
+    $checkPayment=insertData($columns, $table, $values);
 
+    //insert data into member_subscription table
+    if(isset($checkPayment)){
+$startDate=date("Y-m-d");
+    $endDatedate('Y-m-d', strtotime($startDate. " + $planValidity days"));
+    $tableMs = "member_subscription";
+    $columnsMS = '(
+        member_id,
+        plan_id,
+        plan_name,
+        plan_description,
+        plan_start_date,
+        plan_end_date
+    )';
+    $valuesMS = array(
+        $memberId,
+        $planId,
+        $planName,
+        $planDescription,
+        $startDate,
+        $endDate,
+    );
+    $checkSubscription = insertData($columnsMS, $tableMs, $valuesMS);
+    }
+    
+    exit;
+}
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -92,15 +86,6 @@ if (isset($_POST['paymentId']) && isset($_POST['member_id']) && isset($_POST['am
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <form>
-                        <?php 
-                         echo $name;
-                         echo $id;
-                         echo $amount;
-                         echo $contact;
-                         echo $email;
-                         echo $paymentId;
-                         echo $checkPayment;
-                     ?>
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-muted">Your cart</span>
                         </h4>
@@ -158,7 +143,7 @@ if (isset($_POST['paymentId']) && isset($_POST['member_id']) && isset($_POST['am
                         "paymentId": response.razorpay_payment_id,
                     },
                     success: function(result) {
-                        alert("Payment successfull Your payment Id is " + response.razorpay_payment_id)
+                        alert(" Payment successfull Your payment Id is " + response.razorpay_payment_id)
                     }
                 });
             }
