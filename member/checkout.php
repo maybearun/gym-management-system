@@ -41,7 +41,7 @@ if (isset($_POST['paymentId']) && isset($_POST['id']) && isset($_POST['amount'])
     //insert data into member_subscription table
     if(isset($checkPayment)){
 $startDate=date("Y-m-d");
-    $endDatedate('Y-m-d', strtotime($startDate. " + $planValidity days"));
+    $endDate=date('Y-m-d', strtotime($startDate. " + $planValidity days"));
     $tableMs = "member_subscription";
     $columnsMS = '(
         member_id,
@@ -60,6 +60,11 @@ $startDate=date("Y-m-d");
         $endDate,
     );
     $checkSubscription = insertData($columnsMS, $tableMs, $valuesMS);
+    if (isset($_SESSION['errors'])) {
+        echo "<div class='alert alert-danger' role='alert'>
+data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
+        unset($_SESSION['errors']);
+      }
     }
     
     exit;
@@ -143,7 +148,8 @@ $startDate=date("Y-m-d");
                         "paymentId": response.razorpay_payment_id,
                     },
                     success: function(result) {
-                        alert(" Payment successfull Your payment Id is " + response.razorpay_payment_id)
+                        alert(" Payment successfull Your payment Id is " + response.razorpay_payment_id);
+                        console.log(result);
                     }
                 });
             }
