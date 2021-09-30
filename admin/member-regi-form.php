@@ -70,20 +70,7 @@ if (isset($_POST['submit'])) {
   // print_r($values);
   $check=insertData($columns, $table, $values);
   
-  if (isset($check)){
-    echo "<div class='alert alert-success' role='alert'>
-    data $check inserted successfully  </div>";
-  }
-  else{
-    if (isset($_SESSION['errors'])) {
-      echo "<div class='alert alert-danger' role='alert'>
-    data not inserted try again".print_r($_SESSION['errors'])."</div>";
-      ;
-      unset($_SESSION['errors']);
-    }
-    
-    
-  }
+  
   
 }
 
@@ -97,7 +84,22 @@ if (isset($_POST['submit'])) {
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Member Registration</h1>
-
+          <?php
+          if (isset($check)){
+    echo "<div class='alert alert-success' role='alert'>
+    data inserted successfully  </div>";
+  }
+  else{
+    if (isset($_SESSION['errors'])) {
+      echo "<div class='alert alert-danger' role='alert'>
+    data not inserted try again".print_r($_SESSION['errors'])."</div>";
+      ;
+      unset($_SESSION['errors']);
+    }
+    
+    
+  }
+  ?>
         </div>
       </div>
     </div><!-- /.container-fluid -->
