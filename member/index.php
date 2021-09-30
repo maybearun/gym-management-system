@@ -1,7 +1,19 @@
 <?php
-include'../includes/functions.php';
+ require'../includes/functions.php';
   include 'includes/header.php';
   include 'includes/navbar.php';
+  $memberId=$_SESSION['member_id'];
+  $condition= "where member_id= $memberId";
+  $check=fetchData('*','member_subscription',$condition);
+  if (!empty($check)){
+    $planName=$check[0]['plan_name'];
+    $validity=$check[0]['plan_end_date'];
+  }
+  else{
+    $planName="no plans active";
+    $validity="no plans active";
+  }
+
 
   ?>
 <!-- Content Wrapper. Contains page content -->
@@ -22,14 +34,14 @@ include'../includes/functions.php';
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="<?php echo $_SESSION['profile']?>"
+                       src="<?= $_SESSION['profile']?>"
                      
                        alt="User profile picture">
                 </div>
@@ -56,11 +68,39 @@ include'../includes/functions.php';
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <div class="col-md-9">
-            
+          
+          <div class="col-md-4">
+         
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+              <p>Plan name</p>
+                <h3><?= $planName?></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+            </div>
+          
+            <!-- /.card -->
+          </div>
+          <div class="col-md-4">
+         
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+              <p>Plan Valid till</p>
+                <h3><?= $validity?></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+            </div>
+          
             <!-- /.card -->
           </div>
           <!-- /.col -->
+          
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
