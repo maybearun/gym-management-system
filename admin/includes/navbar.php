@@ -29,16 +29,7 @@
          <a href="#" class="d-block">Admin</a>
        </div>
      </div>
-     <!-- <div class="form-inline mt-3 pb-3 mb-3">
-       <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-     </div> -->
+
 
      <!-- Sidebar Menu -->
      <nav class="mt-2">
@@ -63,7 +54,7 @@
                </a>
              </li>
              <li class="nav-item">
-               <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+               <a href="view-members.php" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>View all members</p>
                </a>
@@ -81,7 +72,7 @@
            </a>
            <ul class="nav nav-treeview">
              <li class="nav-item">
-               <a href="pages/charts/chartjs.html" class="nav-link">
+               <a href="view-employees.php" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>View all Employees</p>
                </a>
@@ -96,7 +87,7 @@
            </ul>
          </li>
          <li class="nav-item">
-           <a href="" class="nav-link">
+           <a href="#" class="nav-link">
              <i class="nav-icon fas fa-copy"></i>
              <p>
                Products
@@ -111,7 +102,7 @@
                </a>
              </li>
              <li class="nav-item">
-               <a href="pages/UI/icons.html" class="nav-link">
+               <a href="view-products.php" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>view the product store</p>
                </a>
@@ -139,6 +130,25 @@
                <a href="plans.php" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>view plans</p>
+               </a>
+             </li>
+
+           </ul>
+         </li>
+         <li class="nav-item">
+           <a href="" class="nav-link">
+             <i class="nav-icon fas fa-copy"></i>
+             <p>
+               Payments
+               <i class="fas fa-angle-left right"></i>
+             </p>
+           </a>
+           <ul class="nav nav-treeview">
+             
+             <li class="nav-item">
+               <a href="view-payments.php" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>view payments</p>
                </a>
              </li>
 
