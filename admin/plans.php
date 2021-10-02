@@ -6,18 +6,7 @@ include 'includes/header.php';
 include 'includes/navbar.php';
 $table = 'membership_plans';
 $check = fetchData('*', $table);
-// print_r($check);
 
-// if (isset($check)) {
-//     echo "<div class='alert alert-success' role='alert'>
-//     data $check inserted successfully  </div>";
-//   } else {
-//     if (isset($_SESSION['errors'])) {
-//       echo "<div class='alert alert-danger' role='alert'>
-//     data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
-//       unset($_SESSION['errors']);
-//     }
-//   }
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -51,17 +40,17 @@ $check = fetchData('*', $table);
 
                     </thead>
                     <tbody>
-                        <?php
-
-                        echo '
+                    <?php foreach ($check as $row) { ?>
+                            <form action="checkout.php">
                                 <tr>
-                                    <td>' . $check[0]['plan_name'] . '</td>
-                                    <td>' . $check[0]['plan_description'] . '</td>
-                                    <td>' . $check[0]['plan_price'] . '</td>
-                                    <td>' . $check[0]['plan_validity'] . ' days</td>
+                                    <td id="planName<?= $row['plan_id'] ?>"><?= $row['plan_name'] ?></td>
+                                    <td id="planDescription<?= $row['plan_id'] ?>"><?= $row['plan_description'] ?></td>
+                                    <td id="planPrice<?= $row['plan_id'] ?>"><?= $row['plan_price'] ?></td>
+                                    <td id="planValidity<?= $row['plan_id'] ?>"><?= $row['plan_validity'] ?> days</td>
                                 </tr>
-                            ';
-                        ?>
+                            </form>
+
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -73,6 +62,7 @@ $check = fetchData('*', $table);
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+</div>
 <script>
     $().ready(function() {
         $('#viewPlans').DataTable();
