@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
   $productName = $_POST['productName'];
   $productType = $_POST['productType'];
   $productDesc = $_POST['productDesc'];
-  $fileDestination;
+  $loctionDir;
   $price = $_POST['price'];
   $discount = $_POST['discount'];
   $quantity = $_POST['quantity'];
