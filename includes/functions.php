@@ -101,24 +101,24 @@ function uploadFile($location, $id)
             if($fileSize < 40000000){
                 $fileNewName= $fileName.uniqid('',true).".".$fileActualExt;
                 $fileDestination= $_SERVER['DOCUMENT_ROOT'].$location.$fileNewName;
-				// echo $fileTmpDir."<br>". $fileDestination;
+				$fileLocation=$location.$fileNewName;
                 if (move_uploaded_file($fileTmpDir,$fileDestination)){
-					return $fileDestination;
+					return $fileLocation;
 				}
 				else{
-					echo "there was an error";
+					return "there was an error";
 				}
             }
             else{
-                echo "Your file is to big";
+                return "Your file is to big";
             }
         }
         else{
-            echo "There was an error uploading the file. Please Try again";
+            return "There was an error uploading the file. Please Try again";
         }
     }
     else{
-        echo "You are not allowed to upload images of this format.";
+        return "You are not allowed to upload images of this format.";
     }
     
 // 	$target = $location . time() . basename($id['name']);
