@@ -98,11 +98,10 @@ if (isset($_POST['submit'])) {
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Employee Registration</h1>
-        </div>
-        <?php
+          <?php
         if (isset($check)) {
           echo "<div class='alert alert-success' role='alert'>
-    data $check inserted successfully  </div>";
+    data inserted successfully  </div>";
         } else {
           if (isset($_SESSION['errors'])) {
             echo "<div class='alert alert-danger' role='alert'>
@@ -111,6 +110,7 @@ if (isset($_POST['submit'])) {
           }
         }
         ?>
+        </div>
       </div>
     </div><!-- /.container-fluid -->
   </section>
