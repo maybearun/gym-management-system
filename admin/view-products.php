@@ -49,11 +49,11 @@ $check = fetchData('*', 'products');
                     </div>
                   </div>
                 </div>
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                   <div class="text-right">
                     <a href="#" class="btn btn-sm btn-primary"> Buy</a>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <?php }?>

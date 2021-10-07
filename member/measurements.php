@@ -16,8 +16,8 @@ if (isset($_POST['memberWeight'])&&$_POST['memberHeight']) {
     $memberHeight = $_POST['memberHeight'];
     $columns = '(
         member_id,
-        height,
-        weight
+        weight,
+        height
     )';
     $values = array(
         $memberId,

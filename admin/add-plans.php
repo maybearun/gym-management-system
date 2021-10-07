@@ -22,18 +22,9 @@ if (isset($_POST['submit'])) {
         $planPrice,
         $planValidity
     );
-    insertData($columns, $table, $values);
+   
     $check = insertData($columns, $table, $values);
-    if (isset($check)) {
-        echo "<div class='alert alert-success' role='alert'>
-    data $check inserted successfully  </div>";
-    } else {
-        if (isset($_SESSION['errors'])) {
-            echo "<div class='alert alert-danger' role='alert'>
-    data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
-            unset($_SESSION['errors']);
-        }
-    }
+    
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -43,7 +34,17 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>General Form</h1>
+                    <h1>Add plans</h1>
+<?php                    if (isset($check)) {
+        echo "<div class='alert alert-success' role='alert'>
+    data $check inserted successfully  </div>";
+    } else {
+        if (isset($_SESSION['errors'])) {
+            echo "<div class='alert alert-danger' role='alert'>
+    data not inserted try again" . print_r($_SESSION['errors']) . "</div>";;
+            unset($_SESSION['errors']);
+        }
+    }?>
                 </div>
 
             </div>

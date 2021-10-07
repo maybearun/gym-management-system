@@ -22,7 +22,7 @@
    <div class="sidebar">
      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
        <div class="image">
-         <img src="../../code/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+         <!-- <img src="../../code/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
        </div>
        <div class="info">
          <a href="#" class="d-block"><?php echo $_SESSION['firstName']." ".$_SESSION['lastName']?> </a>
@@ -60,23 +60,23 @@
                  <p>View Subscription Plans</p>
                </a>
              </li>
-             <li class="nav-item">
+             <!-- <li class="nav-item">
                <a href="#" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Renew Subscription</p>
                </a>
-             </li>
+             </li> -->
 
            </ul>
          </li>
-         <li class="nav-item">
+         <!-- <li class="nav-item">
            <a href="" class="nav-link">
              <i class="nav-icon fas fa-copy"></i>
              <p>
                Update personal details
              </p>
            </a>
-         </li>
+         </li> -->
          <li class="nav-item">
            <a href="../../code/logout.php" class="nav-link">
              <i class="nav-icon fas fa-edit"></i>
